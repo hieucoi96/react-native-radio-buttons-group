@@ -1,19 +1,20 @@
-import React from 'react';
-import { PixelRatio, Pressable, StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { PixelRatio, Pressable, StyleSheet, Text, View } from "react-native";
 
-import { RadioButtonProps } from './types';
+import { RadioButtonProps } from "./types";
 
 export default function RadioButton({
   borderColor,
-  color = '#444',
+  color = "#444",
   containerStyle,
+  buttonStyle,
   description,
   descriptionStyle,
   disabled = false,
   id,
   label,
   labelStyle,
-  layout = 'row',
+  layout = "row",
   onPress,
   selected = false,
   size = 24,
@@ -22,11 +23,11 @@ export default function RadioButton({
   const sizeHalf = PixelRatio.roundToNearestPixel(size * 0.5);
   const sizeFull = PixelRatio.roundToNearestPixel(size);
 
-  let orientation: any = { flexDirection: 'row' };
+  let orientation: any = { flexDirection: "row" };
   let margin: any = { marginLeft: 10 };
 
-  if (layout === 'column') {
-    orientation = { alignItems: 'center' };
+  if (layout === "column") {
+    orientation = { alignItems: "center" };
     margin = { marginTop: 10 };
   }
 
@@ -48,7 +49,8 @@ export default function RadioButton({
           orientation,
           { opacity: disabled ? 0.2 : 1 },
           containerStyle,
-        ]}>
+        ]}
+      >
         <View
           style={[
             styles.border,
@@ -59,7 +61,9 @@ export default function RadioButton({
               height: sizeFull,
               borderRadius: sizeHalf,
             },
-          ]}>
+            buttonStyle,
+          ]}
+        >
           {selected && (
             <View
               style={{
@@ -73,19 +77,21 @@ export default function RadioButton({
         </View>
         {Boolean(label) && <Text style={[margin, labelStyle]}>{label}</Text>}
       </Pressable>
-      {Boolean(description) && <Text style={[margin, descriptionStyle]}>{description}</Text>}
+      {Boolean(description) && (
+        <Text style={[margin, descriptionStyle]}>{description}</Text>
+      )}
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 10,
     marginVertical: 5,
   },
   border: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
